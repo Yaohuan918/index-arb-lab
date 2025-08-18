@@ -1,0 +1,23 @@
+universe:
+  cash_symbol: "^GSPC" # S&P 500 Index(cash proxy)
+  futures_symbols: "ES=F" # E-mini S&P 500 
+
+lookback_days: 180 # z-score rolling window
+expiry: "2025-12-19" # futures expiry used to compute time-to-expiry T
+
+rates:
+  annual_rate: 0.03 #flat funding rate r (simplified)
+
+dividends:
+  annual_yield: 0.015  # flat dividend yield d (simplified) 
+
+alerts:
+  z_entry: 2.0 # z-score entry threshold 
+  z_exit: 0.5 # z-score exit threshold 
+
+reporting: 
+  out_dir: "reports"
+  plot_filename: "basis_plot.png"
+  
+logging:
+  path: "logs/app.log"
