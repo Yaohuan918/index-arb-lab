@@ -1,7 +1,11 @@
 __pycache__/
+.vscode/
 *.pyc
 .venv/
 *.egg-info/
 reports/
 logs/
 .DS_Store
+*.png
+*.csv
+.env
