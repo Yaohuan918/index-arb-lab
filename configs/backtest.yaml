@@ -1,0 +1,38 @@
+backtest:
+  etf: "SPY"
+  constituents: ["AAPL", "MSFT", "AMZN", "NVDA", "GOOGL", "META", "AVGO", "TSLA", "BRK-B", "COST", "LLY", "JPM"]
+  start: "2024-01-01"
+  end: "today"
+
+  # monthly re-fit using prior lookback_days (OOS each month)
+  lookback_days: 60
+  z_lookback: 30
+  entry: 2.0             # open when |z| >= entry
+  exit: 0.5              # close when |z| <= exit
+  notional: 5_000_000    # dollar-neutral: long one leg, short the other
+
+optimizer:
+  allow_short: false
+  weight_cap: 0.35
+  ridge_lambda: 0.001
+
+execution:
+  # (simple cost model baked into backtest; you can later plug the simulator)
+  one_way_bps: 2.0
+
+reporting:
+  out_dir: "reports"
+  trades_csv: "bt_trades.csv"
+  perf_csv: "bt_perf.csv"
+  pnl_plot: "bt_pnl.png"
+  dd_plot: "bt_drawdown.png"
+
+risk:
+  target_ann_vol: 0.10      # aim for ~10% annualized vol on the spread
+  max_dd: 0.5               # flatten if equity drawdown > 5%
+  time_stop_days: 35        # close any positons open for more than 15 days
+
+stationarity:
+  adf_lookback: 100         # window (trading days) used for  the ADF test
+  adf_pval: 0.5            # require p-value < 0.05 to pass the test
+  close_on_fail: false      # if true, also close existing 

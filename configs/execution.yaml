@@ -1,0 +1,27 @@
+basket:
+  # Positive qty = BUY, negative qty = SELL
+  - {symbol: 'AAPL', qty: 300}
+  - {symbol: 'MSFT', qty: -200}
+  - {symbol: 'NVDA', qty: 150}
+  - {symbol: 'AMZN', qty: -100}
+
+data:
+  start: "2024-12-01"      # for ADV estimation window
+  end: "today"
+  adv_window: 20        # days for ADV calculation
+
+execution:
+  style: "VWAP"         # one of: TWAP, VWAP, POV
+  n_slices: 12          # number of child orders across the day 
+  pov: 0.10             # used only if style=POV (10% of market volume per slice)
+  spread_bps: 1.0       # half-spread assumption for implementation shortfall 
+  impact_alpha: 15.0    # impact coefficient(tweak!) 
+  impact_beta: 0.6      # concavity of impact 
+  seed: 0               # keep deterministic, no randomness
+
+reporting:
+  out_dir: "reports"
+  summary_csv_prefix: "execution_summary" # prefix for summary CSV files
+  slices_csv_prefix: "execution_slices"   # prefix for slices CSV files
+  overlay_plot: "execution_overlay.png" # overlay plot filename
+  is_plot: "execution_is.png"       # implementation shortfall plot filename

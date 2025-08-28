@@ -1,0 +1,29 @@
+replication:
+  etf_symbol: "SPY" # ETF to replicate 
+  constituents: ["AAPL", "MSFT", "AMZN", "NVDA", "GOOGL", "META", "AVGO", "TSLA"]
+
+# Data window for returns 
+window:
+  start: "2024-01-01"
+  end: "today" 
+  lookback_days: 60   # use past ~3 months to fit weights
+
+# Optimizer settings
+optimizer:
+  allow_short: false # long-only
+  weight_cap: 0.30   #optional max per-name weight (None to disable) 
+  ridge_lambda: 0.005 # L2-regularization strength for ridge regression
+
+rebalance:
+  frequency: "monthly" # rebalance frequency (e.g., "monthly", "quarterly")
+
+costs:
+  one_way_bps: 2.0
+  report_gross: true     # NEW: also output gross (pre-cost) curve
+# Reporting
+reporting:
+  out_dir: "reports" 
+  weights_csv_prefix: "replication_weights" # prefix for weights CSV files 
+  pref_csv_prefix: "replication_pref" # prefix for preference CSV files 
+  overlay_plot: "replication_overlay.png" # overlay plot filename 
+  active_plot: "replication_active.png" # active weights plot filename
