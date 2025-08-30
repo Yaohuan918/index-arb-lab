@@ -1,0 +1,21 @@
+execution:
+  start: "2024-01-01"
+  end: "today"
+  
+  # sizing
+  base_notional: 1_000_000
+  use_vol_target: true
+  vol_lookback: 60
+  vol_target_ann: 0.10
+  vol_floor: 0.5
+  vol_cap: 2.0
+
+  # costs
+  one_way_bps: 2.0
+  slip_bps: 2.0
+
+  # paths
+  out_dir: "reports"
+  paper_csv: "paper_pnl.csv"
+  paper_plot: "paper_pnl.png"
+  read_trades_csv: "reports/bt_trades.csv"
